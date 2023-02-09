@@ -1,0 +1,60 @@
+3. Buat query untuk mendapatkan semua anak Budi
+
+SELECT "family_tree"."id",
+       "family_tree"."name",
+       "family_tree"."gender",
+       "family_tree"."parent_id"
+  FROM "family_tree"
+ INNER JOIN "family_tree" T2
+    ON ("family_tree"."parent_id" = T2."id")
+ WHERE T2."name" = 'Budi'
+
+
+4. Buat query untuk mendapatkan cucu dari budi
+
+SELECT "family_tree"."id",
+       "family_tree"."name",
+       "family_tree"."gender",
+       "family_tree"."parent_id"
+  FROM "family_tree"
+ INNER JOIN "family_tree" T2
+    ON ("family_tree"."parent_id" = T2."id")
+ INNER JOIN "family_tree" T3
+    ON (T2."parent_id" = T3."id")
+ WHERE T3."name" = 'Budi'
+
+
+5. Buat query untuk mendapatkan cucu perempuan dari budi
+
+SELECT "family_tree"."id",
+       "family_tree"."name",
+       "family_tree"."gender",
+       "family_tree"."parent_id"
+  FROM "family_tree"
+ INNER JOIN "family_tree" T2
+    ON ("family_tree"."parent_id" = T2."id")
+ INNER JOIN "family_tree" T3
+    ON (T2."parent_id" = T3."id")
+ WHERE ("family_tree"."gender" = 2 AND T3."name" = 'Budi')
+
+
+6. Buat query untuk mendapatkan bibi dari Farah
+
+ SELECT "family_tree"."id",
+       "family_tree"."name",
+       "family_tree"."gender",
+       "family_tree"."parent_id"
+  FROM "family_tree"
+ INNER JOIN "family_tree" T2
+    ON ("family_tree"."parent_id" = T2."id")
+ WHERE (NOT ("family_tree"."name" = 'Dedi' AND "family_tree"."name" IS NOT NULL) AND "family_tree"."gender" = 2 AND T2."name" = 'Budi' AND NOT ("family_tree"."name" = 'Budi' AND "family_tree"."name" IS NOT NULL))
+
+ 
+ 7. Buat query untuk mendapatkan sepupu laki-laki dari Hani
+
+ SELECT "family_tree"."id",
+       "family_tree"."name",
+       "family_tree"."gender",
+       "family_tree"."parent_id"
+  FROM "family_tree"
+ WHERE ("family_tree"."gender" = 1 AND "family_tree"."parent_id" IN (SELECT U0."id" FROM "family_tree" U0 INNER JOIN "family_tree" U1 ON (U0."parent_id" = U1."id") WHERE (U1."name" = 'Budi' AND NOT (U0."name" = 'Dede' AND U0."name" IS NOT NULL))))

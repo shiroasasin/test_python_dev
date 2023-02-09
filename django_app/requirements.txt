@@ -1,0 +1,7 @@
+django #new version of django
+django-4-jet #beautiful admin panel :)
+django-extensions #additional library
+djangorestframework #for rest api
+markdown       # Markdown support for the browsable API.
+django-filter  # Filtering support
+drf-yasg
